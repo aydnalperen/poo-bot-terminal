@@ -56,10 +56,32 @@ def create_wallet():
         if int(answer) is not 1:
             break
 
-def update_wallet():
-    pass
+def _update_wallet():
+    print_wallets()
+    print("Which Wallet Do You Want to Update?")
+    answer = input("Enter the number of wallet: ")
+    wallets = get_wallets()
+    
+    
+    updatedWallet = wallets[int(answer)-1]
 
-
+    buy_amount = float(input(
+            "Give a buying amount to this wallet and press ENTER: "))
+    gas_limit = float(input(
+        "Give a gas limit to this wallet and press ENTER: "))
+    buy_gwei = float(input(
+        "Write the amount of buying gwei and press ENTER: "))
+    sell_gwei = float(input(
+        "Write the amount of selling gwei and press ENTER: "))
+    
+    updatedWallet["buy_amount"] = buy_amount
+    updatedWallet["gas_limit"] = gas_limit
+    updatedWallet["buy_gwei"] = buy_gwei
+    updatedWallet["sell_gwei"] = sell_gwei
+    
+    update_wallet(str(wallets[int(answer)-1]["id"]),updatedWallet)
+    
+    print("Wallet ",updatedWallet["wallet_name"]," is succesfully updated.")
 def remove_wallet():
     print_wallets()
     wallets = get_wallets()

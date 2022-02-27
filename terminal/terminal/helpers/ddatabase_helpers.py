@@ -8,9 +8,9 @@ def get_wallet_by_id(id):
    data = db.getDb(path.join(path.dirname(__file__)+"/.." +"/database/wallets.json"))
    return data.getBy({"id":id}) 
 
-def update_wallet(old_wallet,updated_wallet):
+def update_wallet(old_wallet_id,updated_wallet):
     data = db.getDb(path.join(path.dirname(__file__)+"/.." +"/database/wallets.json"))
-    data.update(old_wallet.__dict__,updated_wallet.__dict__)
+    data.updateById(old_wallet_id,updated_wallet)
     
 def delete_wallet(id):
     data = db.getDb(path.join(path.dirname(__file__)+"/.." +"/database/wallets.json"))
@@ -45,7 +45,7 @@ def get_transaction_by_id(id):
    data = db.getDb(path.join(path.dirname(__file__)+"/.." +"/database/transactions.json"))
    return data.getBy({"id":id}) 
 
-def update_wallet(old_object,updated_object):
+def update_transaction(old_object,updated_object):
     data = db.getDb(path.join(path.dirname(__file__)+"/.." +"/database/transactions.json"))
     data.update(old_object, updated_object)
     
