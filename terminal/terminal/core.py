@@ -31,7 +31,10 @@ while(True):
             create_wallet()
         elif(secondOption == 3):
             selected_modes = choose_mode()
-            
+        elif (secondOption == 4):
+            remove_wallet()
+        elif (secondOption == 5):
+            remove_mode()
     elif(answer == 5):
         print_modes()
         print_wallets()

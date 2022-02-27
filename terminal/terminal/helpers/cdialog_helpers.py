@@ -24,14 +24,17 @@ def network_dialog():
 
     network_selected = input("Write number of your decision and press ENTER: ")
 
-    print("Connected Network:")
-    print("-> " + network_options[int(network_selected)-1] + "\n")
+    try:
+        print("Connected Network:")
+        print("-> " + network_options[int(network_selected)-1] + "\n")
 
-    return network_options[int(network_selected)-1]
-
+        return network_options[int(network_selected)-1]
+    except:
+        print("Invalid Input!")
+        network_dialog()
 
 def modesAndWalletsOptionsDialog():
-    modesAndWalletsOptions = ["1. Create Modes", "2. Add Wallet"]
+    modesAndWalletsOptions = ["1. Create Modes", "2. Add Wallet(s)","3. Choose Default Mode ","4. Delete a Wallet","5. Delete a Mode"]
     
     print("What action do you want to do?")
     
