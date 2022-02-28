@@ -8,7 +8,7 @@ def get_wallet_by_id(id):
    data = db.getDb(path.join(path.dirname(__file__)+"/.." +"/database/wallets.json"))
    return data.getBy({"id":id}) 
 
-def update_wallet(old_wallet_id,updated_wallet):
+def update_wallet_by_id(old_wallet_id,updated_wallet):
     data = db.getDb(path.join(path.dirname(__file__)+"/.." +"/database/wallets.json"))
     data.updateById(old_wallet_id,updated_wallet)
     
@@ -24,9 +24,9 @@ def get_mode_by_id(id):
     data = db.getDb(path.join(path.dirname(__file__)+"/.." +"/database/modes.json"))
     return data.getBy({"id":id}) 
 
-def update_mode(old_mode,updated_mode):
+def update_mode_by_id(old_mode_id,updated_mode):
     data = db.getDb(path.join(path.dirname(__file__)+"/.." +"/database/modes.json"))
-    data.update(old_mode.__dict__,updated_mode.__dict__)
+    data.updateById(old_mode_id,updated_mode)
     
 def delete_mode(id):
     data = db.getDb(path.join(path.dirname(__file__)+"/.." +"/database/modes.json"))

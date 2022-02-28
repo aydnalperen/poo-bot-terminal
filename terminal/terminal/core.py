@@ -36,9 +36,9 @@ while(True):
         elif (secondOption == 5):
             remove_mode()
         elif (secondOption == 6):
-            wallet._update_wallet()
+            wallet.update_wallet()
         elif (secondOption == 7):
-            mode._update_mode()
+            mode.update_mode()
     elif(answer == 5):
         print_modes()
         print_wallets()
