@@ -24,6 +24,11 @@ pancake_contract = web3.eth.contract(
 
 # Buy
 def buy_token(modes, ca):
+    try:
+        token = web3.toChecksumAddress(ca)
+    except:
+        print("Invalid address")
+        return
     t = time.localtime()
 
     current_time = time.strftime("%H:%M:%S", t)
