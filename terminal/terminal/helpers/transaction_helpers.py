@@ -67,7 +67,7 @@ def buy_token_from_wallet(wallet, ca):
     n = wallet
     n["nonce"] = str(int(wallet["nonce"]) + 1)
 
-    update_wallet(wallet, n)
+    update_wallet_by_id(wallet["id"], n)
 
     signed_transaction = web3.eth.account.sign_transaction(
         transaction, private_key=wallet["private_key"]
@@ -82,11 +82,15 @@ def buy_token_from_wallet(wallet, ca):
 
 
 def approve_token(modes, ca):
+    try:
+        token = web3.toChecksumAddress(ca)
+    except:
+        print("Invalid address")
+        return
     t = time.localtime()
     current_time = time.strftime("%H:%M:%S", t)
     print(current_time, "Approving wallets in modes:", modes, "with", ca)
 
-    token = web3.toChecksumAddress(ca)
 
     token_contract = web3.eth.contract(token, abi=token_abi)
 
@@ -118,7 +122,7 @@ def approve_token_from_wallet(wallet, token, token_contract):
         n = wallet
         n["nonce"] = str(int(wallet["nonce"]) + 1)
 
-        update_wallet(wallet, n)
+        update_wallet_by_id(wallet["id"], n)
 
         signed_transaction = web3.eth.account.sign_transaction(
             transaction, private_key=wallet.private_key
@@ -134,12 +138,14 @@ def approve_token_from_wallet(wallet, token, token_contract):
 
 # Sell
 def sell_token(modes, ca):
+    try:
+        token = web3.toChecksumAddress(ca)
+    except:
+        print("Invalid address")
+        return
     t = time.localtime()
     current_time = time.strftime("%H:%M:%S", t)
     print(current_time, "Selling", ca, "from wallets in modes:", modes)
-
-    token = web3.toChecksumAddress(ca)
-
     token_contract = web3.eth.contract(token, abi=token_abi)
 
     for mode in modes:
@@ -178,7 +184,7 @@ def sell_token_from_wallet(wallet, token, token_contract):
         n = wallet
         n["nonce"] = str(int(wallet["nonce"]) + 1)
 
-        update_wallet(wallet, n)
+        update_wallet_by_id(wallet["id"], n)
 
         signed_transaction = web3.eth.account.sign_transaction(
             transaction, private_key=wallet["private_key"]

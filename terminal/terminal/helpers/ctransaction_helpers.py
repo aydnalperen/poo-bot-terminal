@@ -7,7 +7,7 @@ def buy_dialog(modes):
 
 def approve_dialog(modes):
     ca = input("APPROVE - Paste the contract address and press ENTER: ")
-    buy_token(modes, ca)
+    approve_token(modes, ca)
 
 def sell_dialog(modes):
     ca = input("SELL - Paste the contract address and press ENTER: ")
