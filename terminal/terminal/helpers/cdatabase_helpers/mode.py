@@ -3,7 +3,7 @@ from ..ddatabase_helpers import *
 from .wallet import *
 
 def create_mode():
-    if(get_wallets() is None):
+    if(not get_wallets()):
         create_wallet()
     mode_name = input("Give a name to your new mode and press ENTER: ")
 
@@ -31,7 +31,7 @@ def create_mode():
     mode.save_to_db()
     
     if len(get_modes())==1:
-        add_default_mode(mode)
+        add_default_mode(mode.__dict__)
         print("This mode is set as default since it is the only mode.")
 
     print("New mode added into database.")
@@ -67,10 +67,13 @@ def choose_mode():
         "Write the numbers of modess that you want to use with your next trades (put spaces between numbers)")
     indexes.split()
     newModesArray = []
-
+    old_default_modes = get_default_modes()
+    for i in old_default_modes:
+        delete_default_mode(i["id"])
     for i in indexes:
         newModesArray.append(modes[int(i) - 1])
-
+        add_default_mode(modes[int(i) - 1])
+    
     # show what they have chosen
     print("Your new active modes are: ")
     wallet_str = ""
@@ -93,8 +96,7 @@ def remove_mode():
     
     print_modes()
     modes = get_modes()
-    if modes is None:
-        print("bos")
+    
     print("Which Mode Do You Want to Delete?")
     answer = input("Enter the number of mode: ")
     delete_mode(modes[int(answer)-1]["id"])
