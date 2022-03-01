@@ -8,29 +8,47 @@ def create_wallet():
         name = input("Give a name to your wallet and press ENTER: ")
         address = input("Paste the wallet adress here and press ENTER: ")
         private_key = input("Write private key of your wallet and press ENTER: ")
-        buy_amount = float(input(
-            "Give a buying amount to this wallet and press ENTER: "))
-        gas_limit = float(input(
-            "Give a gas limit to this wallet and press ENTER: "))
-        buy_gwei = float(input(
-            "Write the amount of buying gwei and press ENTER: "))
-        sell_gwei = float(input(
-            "Write the amount of selling gwei and press ENTER: "))
+        while True:
+            try:
+                buy_amount = float(input(
+                "Give a buying amount to this wallet and press ENTER: "))
+                break
+            except:
+                print("Please enter a number!")
+                continue
+        while True:
+            try:
+                gas_limit = float(input(
+                "Give a gas limit to this wallet and press ENTER: "))
+                break
+            except:
+                print("Please enter a number!")
+                continue
+        while True:
+            try:
+                buy_gwei = float(input(
+                "Write the amount of buying gwei and press ENTER: "))
+                break
+            except:
+                print("Please enter a number!")
+                continue
+        while True:
+            try:
+                sell_gwei = float(input(
+                "Write the amount of selling gwei and press ENTER: "))
+                break
+            except:
+                print("Please enter a number!")
+                continue
 
         approved_tokens = []
 
         nonce = get_nonce(address)
         if nonce is None:
             print("Address you entered is invalid!")
-            print("Continue with: ")
-            options = ["1. Add New Wallet","2. Go Back"]
-            for i in options:
-                print(i)
-            reaction = input("What to do you want to do?\n")
+            create_wallet()
             
-            if int(reaction) is not 1:
-                return
-            continue
+            
             #return "wallet address problem"
         print("\n->Added your wallet.")
 
@@ -83,6 +101,7 @@ def update_wallet():
     
     print("Wallet ",updatedWallet["wallet_name"]," is succesfully updated.")
 def remove_wallet():
+    
     print_wallets()
     wallets = get_wallets()
     print("Which Wallet Do You Want to Delete?")

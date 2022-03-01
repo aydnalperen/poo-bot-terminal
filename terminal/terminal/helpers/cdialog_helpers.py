@@ -39,7 +39,8 @@ def modesAndWalletsOptionsDialog():
     print("What action do you want to do?")
     
     for a in modesAndWalletsOptions:
-        print(a)
+        print("\n",a)
+        
         
     answer = input("Write number of your decision and press ENTER: ")
     

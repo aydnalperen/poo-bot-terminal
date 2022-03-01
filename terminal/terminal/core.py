@@ -8,7 +8,7 @@ selected_modes = []
 if(get_modes()):
     selected_modes = choose_mode()  # this array of modes will be used for next trades.
 else:
-    create_wallet()
+    print("You have no saved mode, please create one.")
     create_mode()
     selected_modes = choose_mode()
 while(True):

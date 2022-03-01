@@ -1,7 +1,10 @@
 from models.mode_class import ModeClass
 from ..ddatabase_helpers import *
+from .wallet import *
 
 def create_mode():
+    if(get_wallets() is None):
+        create_wallet()
     mode_name = input("Give a name to your new mode and press ENTER: ")
 
     print("Your wallets are:")
@@ -77,8 +80,16 @@ def choose_mode():
 
 
 def remove_mode():
+    if not get_modes() :
+        print("There is no saved mode!\n")
+        print("Create a new one: \n")
+        create_mode()
+        return
+    
     print_modes()
     modes = get_modes()
+    if modes is None:
+        print("bos")
     print("Which Mode Do You Want to Delete?")
     answer = input("Enter the number of mode: ")
     delete_mode(modes[int(answer)-1]["id"])
