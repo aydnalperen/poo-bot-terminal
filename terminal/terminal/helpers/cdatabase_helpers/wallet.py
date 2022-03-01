@@ -71,7 +71,7 @@ def create_wallet():
         for a in options:
             print(a)
         answer = input("Enter 1 for 'Yes' and 2 for 'No': ")
-        if int(answer) is not 1:
+        if int(answer) != 1:
             break
 
 def update_wallet():
