@@ -52,3 +52,25 @@ def update_transaction(old_object,updated_object):
 def delete_transaction(id):
     data = db.getDb(path.join(path.dirname(__file__)+"/.." +"/database/transactions.json"))
     data.deleteById(id)
+
+
+def get_default_modes():
+    data = db.getDb(path.join(path.dirname(__file__)+"/.." + "/database/default_modes.json"))
+    return data.getAll()
+
+def get_default_mode_by_id(id):
+    data = db.getDb(path.join(path.dirname(__file__)+"/.." + "/database/default_modes.json"))
+    return data.getBy({"id":id})
+
+def delete_default_mode(id):
+    data = db.getDb(path.join(path.dirname(__file__)+"/.." +"/database/default_modes.json"))
+    data.deleteById(id)
+    
+def update_default_mode_by_id(old_mode_id,updated_mode):
+    data = db.getDb(path.join(path.dirname(__file__)+"/.." +"/database/default_modes.json"))
+    data.updateById(old_mode_id,updated_mode)
+    
+def add_default_mode(mode):#mode is object
+    data = db.getDb(path.join(path.dirname(__file__)+"/.." +"/database/default_modes.json"))
+    data.add(mode.__dict__)
+    

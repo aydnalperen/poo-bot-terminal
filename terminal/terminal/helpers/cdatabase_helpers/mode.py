@@ -22,12 +22,17 @@ def create_mode():
         "Write the maximum tax amount for this mode and press ENTER: "))
     print("\n-> Added new ModeClass")
     print("ModeClass Name:", mode_name)
-    print("Wallets to buy:", final_wallets)
+    for i in final_wallets:
+        print("Wallets to buy:", i["wallet_name"],end=" ")
 
     print("Max tax amount:", max_tax)
 
     mode = ModeClass(mode_name, final_wallets, max_tax)
     mode.save_to_db()
+    
+    if len(get_modes())==1:
+        add_default_mode(mode)
+        print("This mode is set as default since it is the only mode.")
 
     print("New mode added into database.")
 

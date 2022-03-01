@@ -4,13 +4,11 @@ from helpers.ddatabase_helpers import *
 entry_dialog()
 
 network_index = network_dialog()
-selected_modes = []
-if(get_modes()):
-    selected_modes = choose_mode()  # this array of modes will be used for next trades.
-else:
+
+if(not get_default_modes()):
     print("You have no saved mode, please create one.")
     create_mode()
-    selected_modes = choose_mode()
+    
 while(True):
     answer = int(main_dialog())
 
