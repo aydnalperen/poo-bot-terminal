@@ -9,6 +9,7 @@ if(not get_default_modes()):
     print("You have no saved mode, please create one.")
     create_mode()
     
+
 while(True):
     answer = int(main_dialog())
 

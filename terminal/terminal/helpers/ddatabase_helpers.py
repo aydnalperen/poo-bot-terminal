@@ -53,6 +53,9 @@ def delete_transaction(id):
     data = db.getDb(path.join(path.dirname(__file__)+"/.." +"/database/transactions.json"))
     data.deleteById(id)
 
+def get_default_mode_by_name(name):
+    data = db.getDb(path.join(path.dirname(__file__)+"/.." + "/database/default_modes.json"))
+    return data.getBy({"mode_name":name})
 
 def get_default_modes():
     data = db.getDb(path.join(path.dirname(__file__)+"/.." + "/database/default_modes.json"))

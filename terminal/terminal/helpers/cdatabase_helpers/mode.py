@@ -1,3 +1,4 @@
+from operator import ge
 from models.mode_class import ModeClass
 from ..ddatabase_helpers import *
 from .wallet import *
@@ -96,11 +97,24 @@ def remove_mode():
     
     print_modes()
     modes = get_modes()
-    
+    default_modes = get_default_modes()
     print("Which Mode Do You Want to Delete?")
     answer = input("Enter the number of mode: ")
+    
+    default_mode_to_delete = get_default_mode_by_name(modes[int(answer)-1]["mode_name"])
+    delete_default_mode(default_mode_to_delete["id"])
+    print("Mode ",modes[int(answer)-1]["mode_name"]," is removed from default modes." )
     delete_mode(modes[int(answer)-1]["id"])
     print("Mode ",modes[int(answer)-1]["mode_name"]," is succesfuly deleted.")
+    
+    if not get_default_modes():
+        print("You have not a default (active) mode!")
+        
+        if not get_modes():
+            print("You have not any mode, create one!")
+            create_mode()
+        else:
+            choose_mode()
 
 def print_modes():
     print("Modes: ")
