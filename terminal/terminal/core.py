@@ -6,21 +6,23 @@ entry_dialog()
 network_index = network_dialog()
 
 if(not get_default_modes()):
+    if not get_modes():
+        print("You have no mode, create one first!")
+        create_mode()
     print("You have no default mode, please chose one.")
     choose_mode()
-    
 
 while(True):
     answer = int(main_dialog())
 
     if(answer == 1):
-        buy_dialog(selected_modes)
+        buy_dialog()
 
     elif(answer == 2):
-        sell_dialog(selected_modes)
+        sell_dialog()
 
     elif(answer == 3):
-        approve_dialog(selected_modes)
+        approve_dialog()
 
     elif(answer == 4):
         secondOption = int(modesAndWalletsOptionsDialog())

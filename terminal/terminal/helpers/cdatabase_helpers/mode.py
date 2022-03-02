@@ -1,41 +1,8 @@
 from operator import ge
 from models.mode_class import ModeClass
 from ..ddatabase_helpers import *
-from .wallet import *
+from .create_helpers import *
 
-def create_mode():
-    if(not get_wallets()):
-        create_wallet()
-    mode_name = input("Give a name to your new mode and press ENTER: ")
-
-    print("Your wallets are:")
-
-    wallets = get_wallets()
-    for i in range(len(wallets)):
-        print(str(i+1) + ". " + str(wallets[i]["wallet_name"]))
-
-    wallets_to_add = map(int, input("Write the number of your wallets that you want to add this mode (put space between numbers): ").split())    
-    final_wallets=[]
-    for x in wallets_to_add: 
-        final_wallets.append(wallets[x-1])
-
-    max_tax = float(input(
-        "Write the maximum tax amount for this mode and press ENTER: "))
-    print("\n-> Added new ModeClass")
-    print("ModeClass Name:", mode_name)
-    for i in final_wallets:
-        print("Wallets to buy:", i["wallet_name"],end=" ")
-
-    print("Max tax amount:", max_tax)
-
-    mode = ModeClass(mode_name, final_wallets, max_tax)
-    mode.save_to_db()
-    
-    if len(get_modes())==1:
-        add_default_mode(mode.__dict__)
-        print("This mode is set as default since it is the only mode.")
-
-    print("New mode added into database.")
 
 
 def update_mode():
@@ -53,7 +20,12 @@ def update_mode():
     updatedMode["max_tax"] = max_tax
     update_mode_by_id(updatedMode["id"],updatedMode)
     print("Mode is succesfully updated!")
+    update_default_mode_by_name(modes[int(answer)-1]["mode_name"],updatedMode)
+    print("Active mode is updated!")
 def choose_mode():
+    if not get_wallets():
+        print("You have no wallets to create a mode, add a wallet first!")
+        create_wallet()
     print("\nyour modes are: ")
     modes = get_modes()
 

@@ -1,78 +1,8 @@
 from models.wallet_class import WalletClass
 from ..ddatabase_helpers import *
 from ..transaction_helpers import *
-
-
-def create_wallet():
-    while True:
-        name = input("Give a name to your wallet and press ENTER: ")
-        address = input("Paste the wallet adress here and press ENTER: ")
-        private_key = input("Write private key of your wallet and press ENTER: ")
-        while True:
-            try:
-                buy_amount = float(input(
-                "Give a buying amount to this wallet and press ENTER: "))
-                break
-            except:
-                print("Please enter a number!")
-                continue
-        while True:
-            try:
-                gas_limit = float(input(
-                "Give a gas limit to this wallet and press ENTER: "))
-                break
-            except:
-                print("Please enter a number!")
-                continue
-        while True:
-            try:
-                buy_gwei = float(input(
-                "Write the amount of buying gwei and press ENTER: "))
-                break
-            except:
-                print("Please enter a number!")
-                continue
-        while True:
-            try:
-                sell_gwei = float(input(
-                "Write the amount of selling gwei and press ENTER: "))
-                break
-            except:
-                print("Please enter a number!")
-                continue
-
-        approved_tokens = []
-
-        nonce = get_nonce(address)
-        if nonce is None:
-            print("Address you entered is invalid!")
-            create_wallet()
-            
-            
-            #return "wallet address problem"
-        print("\n->Added your wallet.")
-
-        print("WalletClass Name: "+name)
-        print("WalletClass Adress: " + address)
-        print("Buying Amonut: " + str(buy_amount))
-        print("Gas Limit : " + str(gas_limit))
-        print("Buying Gwei Limit" + str(buy_gwei))
-        print("Selling Gwei Limit" + str(sell_gwei))
-
-        wallet = WalletClass(name, address, private_key, buy_amount,
-                            gas_limit, buy_gwei, sell_gwei, nonce, approved_tokens)
-        wallet.save_to_db()
-
-        print("New wallet added into database.")
-        
-        #
-        print("Do you want to add another wallet?")
-        options = ["1. Yes","2. No"]
-        for a in options:
-            print(a)
-        answer = input("Enter 1 for 'Yes' and 2 for 'No': ")
-        if int(answer) != 1:
-            break
+from .create_helpers import *
+from .mode import *
 
 def update_wallet():
     print_wallets()
@@ -99,6 +29,29 @@ def update_wallet():
     
     update_wallet_by_id(str(wallets[int(answer)-1]["id"]),updatedWallet)
     
+    
+    modes = get_modes()
+    default_modes = get_default_modes()
+    
+    for mode in modes: 
+        for wallet in mode["wallets"]:
+            if wallet["wallet_name"] == updatedWallet["wallet_name"]:
+                mode["wallets"].remove(wallet)
+                wallet = updatedWallet
+                mode["wallets"].append(wallet)
+                update_mode_by_id(mode["id"],mode)
+                print("Mode ",mode["mode_name"]," is updated due to changes in wallet ",wallet["wallet_name"]," .")
+                break
+    for mode in default_modes: 
+        for wallet in mode["wallets"]:
+            if wallet["wallet_name"] == updatedWallet["wallet_name"]:
+                mode["wallets"].remove(wallet)
+                wallet = updatedWallet
+                mode["wallets"].append(wallet)
+                update_default_mode_by_id(mode["id"],mode)
+                print("Active Mode ",mode["mode_name"]," is updated due to changes in wallet ",wallet["wallet_name"]," .")
+                break
+            
     print("Wallet ",updatedWallet["wallet_name"]," is succesfully updated.")
 def remove_wallet():
     
@@ -109,22 +62,38 @@ def remove_wallet():
     
     modes = get_modes()
     
+    modes_to_delete = []
+    print("Modes ",end=" ")
     for mode in modes:
         for wallet in mode["wallets"]:
             if wallet["id"] == wallets[int(answer)-1]["id"]:
-                print("Mode ",mode["mode_name"]," will be deleted since it contains the wallet you want to delete.")
-                print("Do you want to continue?")
-                print("1. Yes \n2. No")
-                yes_no = input("Your Answer: ")
-                if int(yes_no) == 1:
-                    delete_mode(mode["id"])
-                    print("Mode ",mode["mode_name"]," is succesfuly deleted.")
-                    continue
-                elif int(yes_no)==2:
-                    return                     
+                modes_to_delete.append(mode)
+                print(mode["mode_name"],end=" ")
+                 
+    print("will be deleted since they contain the wallet you want to remove.") 
+    print("Do you want to continue?")
+    print("1. Yes \n2. No")
+    yes_no = input("Your Answer: ")
+    if int(yes_no) == 1:
+        for mode in modes_to_delete:
+            delete_mode(mode["id"])
+            print("Mode ",mode["mode_name"]," is deleted.")
+            default_mode_to_delete = get_default_mode_by_name(mode["mode_name"])
+            delete_default_mode(default_mode_to_delete[0]["id"])       
+    else:
+        print("No wallet or mode is deleted.")
+        return                    
+    
     delete_wallet(wallets[int(answer)-1]["id"])
     print("Wallet ",wallets[int(answer)-1]["wallet_name"]," is succesfuly deleted.")
 
+    if not get_default_modes():
+        print("You have not a default (active) mode!")
+        if not get_modes():
+            print("You have no mode, create one!")
+            create_mode()
+        else:
+            choose_mode()
 
 def print_wallets():
     print("Wallets:")

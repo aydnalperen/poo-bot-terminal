@@ -72,7 +72,10 @@ def delete_default_mode(id):
 def update_default_mode_by_id(old_mode_id,updated_mode):
     data = db.getDb(path.join(path.dirname(__file__)+"/.." +"/database/default_modes.json"))
     data.updateById(old_mode_id,updated_mode)
-    
+
+def update_default_mode_by_name(name,updated_mode):
+    data = db.getDb(path.join(path.dirname(__file__)+"/.." +"/database/default_modes.json"))
+    data.update({"mode_name":name},updated_mode)
 def add_default_mode(mode):
     data = db.getDb(path.join(path.dirname(__file__)+"/.." +"/database/default_modes.json"))
     data.add(mode)
