@@ -72,8 +72,11 @@ def choose_mode():
     for i in old_default_modes:
         delete_default_mode(i["id"])
     for i in indexes:
-        newModesArray.append(modes[int(i) - 1])
-        add_default_mode(modes[int(i) - 1])
+        try:
+            newModesArray.append(modes[int(i) - 1])
+            add_default_mode(modes[int(i) - 1])
+        except:
+            print("Invalid input!")
     
     # show what they have chosen
     print("Your new active modes are: ")
@@ -102,7 +105,7 @@ def remove_mode():
     answer = input("Enter the number of mode: ")
     
     default_mode_to_delete = get_default_mode_by_name(modes[int(answer)-1]["mode_name"])
-    delete_default_mode(default_mode_to_delete["id"])
+    delete_default_mode(default_mode_to_delete[0]["id"])
     print("Mode ",modes[int(answer)-1]["mode_name"]," is removed from default modes." )
     delete_mode(modes[int(answer)-1]["id"])
     print("Mode ",modes[int(answer)-1]["mode_name"]," is succesfuly deleted.")
@@ -111,7 +114,7 @@ def remove_mode():
         print("You have not a default (active) mode!")
         
         if not get_modes():
-            print("You have not any mode, create one!")
+            print("You have no mode, create one!")
             create_mode()
         else:
             choose_mode()

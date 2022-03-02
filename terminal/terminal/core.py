@@ -6,8 +6,8 @@ entry_dialog()
 network_index = network_dialog()
 
 if(not get_default_modes()):
-    print("You have no saved mode, please create one.")
-    create_mode()
+    print("You have no default mode, please chose one.")
+    choose_mode()
     
 
 while(True):
