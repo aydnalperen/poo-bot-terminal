@@ -74,7 +74,6 @@ def remove_wallet():
     print("Do you want to continue?")
     print("1. Yes \n2. No")
     yes_no = input("Your Answer: ")
-    default_modes=get_default_modes()
     if int(yes_no) == 1:
         for mode in modes_to_delete:
             delete_mode(mode["id"])
