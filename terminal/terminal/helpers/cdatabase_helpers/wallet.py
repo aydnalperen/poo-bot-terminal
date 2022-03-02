@@ -15,11 +15,11 @@ def update_wallet():
 
     buy_amount = float(input(
             "Give a buying amount to this wallet and press ENTER: "))
-    gas_limit = float(input(
+    gas_limit = int(input(
         "Give a gas limit to this wallet and press ENTER: "))
-    buy_gwei = float(input(
+    buy_gwei = int(input(
         "Write the amount of buying gwei and press ENTER: "))
-    sell_gwei = float(input(
+    sell_gwei = int(input(
         "Write the amount of selling gwei and press ENTER: "))
     
     updatedWallet["buy_amount"] = buy_amount
@@ -74,12 +74,14 @@ def remove_wallet():
     print("Do you want to continue?")
     print("1. Yes \n2. No")
     yes_no = input("Your Answer: ")
+    default_modes=get_default_modes()
     if int(yes_no) == 1:
         for mode in modes_to_delete:
             delete_mode(mode["id"])
             print("Mode ",mode["mode_name"]," is deleted.")
             default_mode_to_delete = get_default_mode_by_name(mode["mode_name"])
-            delete_default_mode(default_mode_to_delete[0]["id"])       
+            if default_mode_to_delete:
+                delete_default_mode(default_mode_to_delete[0]["id"])       
     else:
         print("No wallet or mode is deleted.")
         return                    
