@@ -9,8 +9,9 @@ if(not get_default_modes()):
     if not get_modes():
         print("You have no mode, create one first!")
         create_mode()
-    print("You have no default mode, please chose one.")
-    choose_mode()
+    else:
+        print("You have no default mode, please chose one.")
+        choose_mode()
 
 while(True):
     answer = int(main_dialog())
