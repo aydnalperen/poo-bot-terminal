@@ -28,17 +28,17 @@ while(True):
     elif(answer == 4):
         secondOption = int(modesAndWalletsOptionsDialog())
         if(secondOption == 1):
-            create_mode()
-        elif(secondOption == 2):
             create_wallet()
-        elif(secondOption == 3):
-            selected_modes = choose_mode()
-        elif (secondOption == 4):
+        elif(secondOption == 2):
             remove_wallet()
-        elif (secondOption == 5):
-            remove_mode()
+        elif (secondOption == 3):
+            wallet.update_wallet()    
+        elif (secondOption == 4):
+            create_mode()
+        elif(secondOption == 5):
+            choose_mode()
         elif (secondOption == 6):
-            wallet.update_wallet()
+            remove_mode()
         elif (secondOption == 7):
             mode.update_mode()
     elif(answer == 5):

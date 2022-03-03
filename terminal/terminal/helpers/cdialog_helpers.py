@@ -34,7 +34,7 @@ def network_dialog():
         network_dialog()
 
 def modesAndWalletsOptionsDialog():
-    modesAndWalletsOptions = ["1. Create Modes", "2. Add Wallet(s)","3. Choose Default Mode ","4. Delete a Wallet","5. Delete a Mode","6. Update a Wallet","7. Update a Mode"]
+    modesAndWalletsOptions = ["1. Add Wallet(s)","2. Delete a Wallet","3. Update a Wallet","4. Create Modes","5. Choose Default Mode ","6. Delete a Mode","7. Update a Mode"]
     
     print("What action do you want to do?")
     
