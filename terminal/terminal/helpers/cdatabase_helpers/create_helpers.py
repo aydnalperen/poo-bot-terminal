@@ -9,38 +9,34 @@ def create_wallet():
         name = input("Give a name to your wallet and press ENTER: ")
         address = input("Paste the wallet adress here and press ENTER: ")
         private_key = input("Write private key of your wallet and press ENTER: ")
-        while True:
-            try:
-                buy_amount = float(input(
-                "Give a buying amount to this wallet and press ENTER (Default: 0.01): "))
-                break
-            except:
-                print("Please enter a number!")
-                continue
-        while True:
-            try:
-                gas_limit = int(input(
-                "Give a gas limit to this wallet and press ENTER (Default: 250000): "))
-                break
-            except:
-                print("Please enter a number!")
-                continue
-        while True:
-            try:
-                buy_gwei = int(input(
-                "Write the amount of buying gwei and press ENTER: "))
-                break
-            except:
-                print("Please enter a number!")
-                continue
-        while True:
-            try:
-                sell_gwei = int(input(
-                "Write the amount of selling gwei and press ENTER: "))
-                break
-            except:
-                print("Please enter a number!")
-                continue
+        try:
+            buy_amount = float(input(
+            "Give a buying amount to this wallet and press ENTER (Default: 0.01): "))
+            break
+        except:
+            print("Buy amount is assigned to its default value 0.01! Enter a proper number to update it.")
+            buy_amount = 0.01
+        try:
+            gas_limit = int(input(
+            "Give a gas limit to this wallet and press ENTER (Default: 250000): "))
+            break
+        except:
+            print("Gas limit is assigned to its default value 250000! Enter a proper number to update it.")
+            gas_limit = 25000
+        try:
+            buy_gwei = int(input(
+            "Write the amount of buying gwei and press ENTER (Default: 5): "))
+            break
+        except:
+            print("Buy gwei is assigned to its default value 5! Enter a proper number to update it.")
+            buy_gwei = 5
+        try:
+            sell_gwei = int(input(
+            "Write the amount of selling gwei and press ENTER (Default: 5): "))
+            break
+        except:
+            print("Sell gwei is assigned to its default value 5! Enter a proper number to update it.")
+            sell_gwei = 5
 
         approved_tokens = []
 
@@ -53,17 +49,17 @@ def create_wallet():
             #return "wallet address problem"
         print("\n->Added your wallet.")
 
-        print("WalletClass Name: "+name)
-        print("WalletClass Adress: " + address)
-        print("Buying Amonut: " + str(buy_amount))
-        print("Gas Limit : " + str(gas_limit))
-        print("Buying Gwei Limit" + str(buy_gwei))
-        print("Selling Gwei Limit" + str(sell_gwei))
 
-        wallet = WalletClass(name, address, private_key, buy_amount,
+
+        wallet = WalletClass(name, address, private_key,buy_amount  ,
                             gas_limit, buy_gwei, sell_gwei, nonce, approved_tokens)
         wallet.save_to_db()
-
+        print("WalletClass Name: ",wallet.wallet_name)
+        print("WalletClass Adress: " , wallet.address)
+        print("Buying Amonut: " , wallet.buy_amount)
+        print("Gas Limit : " , wallet.gas_limit)
+        print("Buying Gwei Limit" , wallet.buy_gwei)
+        print("Selling Gwei Limit"  ,wallet.sell_gwei)
         print("New wallet added into database.")
         
         #
