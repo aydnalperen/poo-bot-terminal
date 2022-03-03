@@ -1,3 +1,6 @@
+from terminal.terminal.helpers.transaction_helpers import get_status
+
+
 class TransactionClass():
     def __init__(self, ca, trades = [], total_amount = 0, coin_amount = 0):
         self.ca = ca
@@ -26,6 +29,8 @@ class TradeClass():
         self.coin_amount = coin_amount
         self.status = status
 
-    # def check_status(self):
-    #     # TODO: (Eren) Get the status of the trade
-    #     self.status = (Solidity status check)
+    def check_status_and_update(self):
+        self.status = get_status(self.tx_address)
+
+    def check_coin_amount_and_update(self):
+        self.coin_amount = 0 # TODO: (Eren) Get coin amount out from the transaction

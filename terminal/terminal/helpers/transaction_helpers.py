@@ -203,3 +203,19 @@ def get_nonce(address):
     except Exception as e:
         print(e)
         
+def get_status(trade, tx_address):
+    try:
+        receipt = web3.eth.getTransactionReceipt(tx_address)
+        # value =  web3.eth.getTransaction(trade.tx_address)
+        # print(value)
+        if(receipt):
+            if(receipt.status == 1):
+                trade.status = "Success"
+            elif(receipt.status == 0):
+                status = "Fail"
+        else:
+            status = "Pending"
+
+        return status
+    except:
+        raise f"Exception occured while getting status of the transaction {tx_address}. \nCheck transaction_helpers.py > get_status()."
