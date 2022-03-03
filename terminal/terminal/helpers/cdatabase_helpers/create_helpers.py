@@ -12,7 +12,7 @@ def create_wallet():
         while True:
             try:
                 buy_amount = float(input(
-                "Give a buying amount to this wallet and press ENTER: "))
+                "Give a buying amount to this wallet and press ENTER (Default: 0.01): "))
                 break
             except:
                 print("Please enter a number!")
@@ -20,7 +20,7 @@ def create_wallet():
         while True:
             try:
                 gas_limit = int(input(
-                "Give a gas limit to this wallet and press ENTER: "))
+                "Give a gas limit to this wallet and press ENTER (Default: 250000): "))
                 break
             except:
                 print("Please enter a number!")

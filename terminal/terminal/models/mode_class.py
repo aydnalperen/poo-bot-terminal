@@ -1,6 +1,6 @@
 from pysondb import db
 class ModeClass():
-    def __init__(self, name, wallets, max_tax):
+    def __init__(self, name, wallets, max_tax=0):
         self.mode_name = name
         self.wallets = wallets
         self.max_tax = max_tax

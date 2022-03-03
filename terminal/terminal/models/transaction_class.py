@@ -2,12 +2,12 @@ from terminal.terminal.helpers.transaction_helpers import get_status
 
 
 class TransactionClass():
-    def __init__(self, ca, trades = [], total_amount = 0, coin_amount = 0):
+    def __init__(self, ca, trades = [], total_amount = 0, coin_amount = 0,is_over=False):
         self.ca = ca
         self.trades = trades
         self.total_amount = total_amount
         self.coin_amount = coin_amount
-
+        self.is_over = is_over
 
     # Add trade only when its status is successfull
     def add_trade(self, trade):
