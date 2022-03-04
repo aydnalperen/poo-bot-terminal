@@ -12,28 +12,28 @@ def create_wallet():
         try:
             buy_amount = float(input(
             "Give a buying amount to this wallet and press ENTER (Default: 0.01): "))
-            break
+            
         except:
             print("Buy amount is assigned to its default value 0.01! Enter a proper number to update it.")
             buy_amount = 0.01
         try:
             gas_limit = int(input(
             "Give a gas limit to this wallet and press ENTER (Default: 250000): "))
-            break
+            
         except:
             print("Gas limit is assigned to its default value 250000! Enter a proper number to update it.")
             gas_limit = 25000
         try:
             buy_gwei = int(input(
             "Write the amount of buying gwei and press ENTER (Default: 5): "))
-            break
+            
         except:
             print("Buy gwei is assigned to its default value 5! Enter a proper number to update it.")
             buy_gwei = 5
         try:
             sell_gwei = int(input(
             "Write the amount of selling gwei and press ENTER (Default: 5): "))
-            break
+            
         except:
             print("Sell gwei is assigned to its default value 5! Enter a proper number to update it.")
             sell_gwei = 5
