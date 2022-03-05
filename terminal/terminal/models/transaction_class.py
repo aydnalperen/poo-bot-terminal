@@ -1,4 +1,4 @@
-from terminal.terminal.helpers.transaction_helpers import get_status
+from helpers.transaction_helpers import get_status
 from pysondb import db
 
 
