@@ -13,7 +13,7 @@ def get_net():
 
 
 
-web3 = Web3(Web3.HTTPProvider(get_net()))
+web3 = helpers.Web3(helpers.Web3.HTTPProvider(get_net()))
 
 pancake_router_contract_address = "0x10ED43C718714eb63d5aA57B78B54704E256024E"
 wbnb = web3.toChecksumAddress("0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c")
@@ -38,7 +38,7 @@ def buy_token(modes, ca):
     print(current_time, "Buying", ca, "with wallets in modes:", modes)
 
     for mode in modes:
-        t = threading.Thread(target=buy_token_from_mode(mode, ca))
+        t = helpers.threading.Thread(target=buy_token_from_mode(mode, ca))
         t.start()
 
 
@@ -46,7 +46,7 @@ def buy_token_from_mode(mode, ca):
     wallets = mode["wallets"]
     print(wallets)
     for wallet in wallets:
-        t = threading.Thread(target=buy_token_from_wallet(wallet, ca))
+        t = helpers.threading.Thread(target=buy_token_from_wallet(wallet, ca))
 
 
 def buy_token_from_wallet(wallet, ca):
@@ -101,7 +101,7 @@ def approve_token(modes, ca):
     token_contract = web3.eth.contract(token, abi=token_abi)
 
     for mode in modes:
-        t = threading.Thread(
+        t = helpers.threading.Thread(
             target=approve_token_from_mode(mode, token, token_contract))
         t.start()
 
@@ -110,7 +110,7 @@ def approve_token_from_mode(mode, token, token_contract):
     wallets = mode.wallets
 
     for wallet in wallets:
-        t = threading.Thread(target=approve_token_from_wallet(
+        t = helpers.threading.Thread(target=approve_token_from_wallet(
             wallet, token, token_contract))
 
 
@@ -155,7 +155,7 @@ def sell_token(modes, ca):
     token_contract = web3.eth.contract(token, abi=token_abi)
 
     for mode in modes:
-        t = threading.Thread(
+        t = helpers.threading.Thread(
             target=sell_token_from_mode(mode, token, token_contract))
         t.start()
 
@@ -164,7 +164,7 @@ def sell_token_from_mode(mode, token, token_contract):
     wallets = mode["wallets"]
 
     for wallet in wallets:
-        t = threading.Thread(target=sell_token_from_wallet(
+        t = helpers.threading.Thread(target=sell_token_from_wallet(
             wallet, token, token_contract))
 
 
