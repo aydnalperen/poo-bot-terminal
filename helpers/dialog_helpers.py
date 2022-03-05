@@ -23,13 +23,14 @@ def network_dialog():
         print(o)
 
     network_selected = input("Write number of your decision and press ENTER: ")
-    network_dict = {"network":network_selected}
+    network_dict = {"network": network_selected}
     data = helpers.db.getDb(helpers.path.join(helpers.path.dirname(__file__)+"/.." + "/database/selected_network.json"))
-    if not data.get(1):
+
+
+    if not data.getAll():
         data.add(network_dict)  
     else:  
-        network = data.get(1)
-        print(network)
+        network = data.getAll()
         data.updateById(network[0]["id"], network_dict)
     try:
         print("Connected Network:")

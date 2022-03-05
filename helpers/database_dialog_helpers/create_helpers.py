@@ -38,6 +38,7 @@ def create_wallet():
         approved_tokens = []
 
         nonce = helpers.get_nonce(address)
+        
         if nonce is None:
             print("Address you entered is invalid!")
             create_wallet()
