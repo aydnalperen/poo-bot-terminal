@@ -4,13 +4,22 @@ import time
 
 from web3 import Web3
 import threading
+<<<<<<< Updated upstream:helpers/transaction_helpers.py
 
+=======
+from helpers.ddatabase_helpers import * 
+from pysondb import db
+
+   
+>>>>>>> Stashed changes:terminal/terminal/helpers/transaction_helpers.py
 bsc_mainnet = "https://bsc-dataseed.binance.org/"
 bsc_testnet = "https://data-seed-prebsc-1-s1.binance.org:8545/"
 
 
 def get_net():
-    return bsc_mainnet
+    data = db.getDb(path.join(path.dirname(__file__)+"/.." + "/database/selected_network.json"))
+    return data.get(1)
+
 
 
 web3 = Web3(Web3.HTTPProvider(get_net()))
