@@ -75,7 +75,11 @@ def create_mode():
     if(not get_wallets()):
         print("You have no wallet to create a mode, add a wallet first!")
         create_wallet()
-    mode_name = input("Give a name to your new mode and press ENTER: ")
+    try:
+        mode_name = input("Give a name to your new mode and press ENTER: ")
+    except:
+        print("There is no default name for modes, enter a valid name!")
+        return
 
     print("Your wallets are:")
 
@@ -83,13 +87,22 @@ def create_mode():
     for i in range(len(wallets)):
         print(str(i+1) + ". " + str(wallets[i]["wallet_name"]))
 
-    wallets_to_add = map(int, input("Write the number of your wallets that you want to add this mode (put space between numbers): ").split())    
-    final_wallets=[]
-    for x in wallets_to_add: 
-        final_wallets.append(wallets[x-1])
+    while True:
+        try:
+            wallets_to_add = map(int, input("Write the number of your wallets that you want to add this mode (put space between numbers): ").split())    
+            final_wallets=[]
+            for x in wallets_to_add: 
+                final_wallets.append(wallets[x-1])
+            break
+        except:
+            print("Invalid Input!")    
 
-    max_tax = float(input(
-        "Write the maximum tax amount for this mode and press ENTER: "))
+
+    try:
+        max_tax = float(input("Write the maximum tax amount for this mode and press ENTER: "))
+    except:
+        print("Invalid Input! Enter a number!")
+        return
     print("\n-> Added new ModeClass")
     print("ModeClass Name:", mode_name)
     for i in final_wallets:
