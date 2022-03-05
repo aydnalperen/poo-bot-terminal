@@ -1,7 +1,5 @@
+import models
 import helpers
-
-from web3 import Web3
-import threading
 
 
 bsc_mainnet = "https://bsc-dataseed.binance.org/"
@@ -10,7 +8,8 @@ bsc_testnet = "https://data-seed-prebsc-1-s1.binance.org:8545/"
 
 def get_net():
     data = helpers.db.getDb(helpers.path.join(helpers.path.dirname(__file__)+"/.." + "/database/selected_network.json"))
-    return data.get(1)
+    selected = data.get(1)[0]["network"]
+    return bsc_testnet if selected ==1 else bsc_mainnet
 
 
 
