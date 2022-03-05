@@ -1,10 +1,11 @@
 import helpers
+
 def entry_dialog():
     pass
 
 def main_dialog():
     actions = ["1. Buy token", "2. Sell token", "3. Approve token","4. Modes and Wallets Options"
-               ,"5. Show Modes and Wallets."]
+            ,"5. Show Modes and Wallets."]
 
     print("What action do you want to do?")
     for a in actions:

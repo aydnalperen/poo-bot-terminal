@@ -1,6 +1,7 @@
 import models
 import helpers
 
+
 def update_wallet():
     print_wallets()
     print("Which Wallet Do You Want to Update?")
@@ -73,7 +74,7 @@ def remove_wallet():
             if wallet["id"] == wallets[int(answer)-1]["id"]:
                 modes_to_delete.append(mode)
                 print(mode["mode_name"],end=" ")
-                 
+                
     print("will be deleted since they contain the wallet you want to remove.") 
     print("Do you want to continue?")
     print("1. Yes \n2. No")
@@ -112,4 +113,4 @@ def print_wallets():
         walletTemp = wallets[i]
 
         print("- "+str(i+1) + ". Name:" + walletTemp["wallet_name"] ,"Id:",walletTemp["id"], "  Adress:" + walletTemp["address"] + "  Buying Amount:" + str(walletTemp["buy_amount"]) + "  Buying Gwei:" + str(walletTemp["buy_gwei"])
-              + "  Selling Gwei:" +str( walletTemp["sell_gwei"]) + "  Approved Tokens:" + at_str)
+            + "  Selling Gwei:" +str( walletTemp["sell_gwei"]) + "  Approved Tokens:" + at_str)

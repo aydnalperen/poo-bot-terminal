@@ -1,5 +1,6 @@
 import helpers
-def __main__():
+
+if __name__ == "__main__":
     helpers.entry_dialog()
 
     network_index = helpers.network_dialog()

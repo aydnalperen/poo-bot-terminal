@@ -1,12 +1,13 @@
 import helpers
 
+
 def get_wallets():
-   data = helpers.db.getDb(helpers.path.join(helpers.path.dirname(__file__)+"/.." + "/database/wallets.json"))
-   return data.getAll()
+    data = helpers.db.getDb(helpers.path.join(helpers.path.dirname(__file__)+"/.." + "/database/wallets.json"))
+    return data.getAll()
 
 def get_wallet_by_id(id):
-   data = helpers.db.getDb(helpers.path.join(helpers.path.dirname(__file__)+"/.." +"/database/wallets.json"))
-   return data.getBy({"id":id}) 
+    data = helpers.db.getDb(helpers.path.join(helpers.path.dirname(__file__)+"/.." +"/database/wallets.json"))
+    return data.getBy({"id":id}) 
 
 def update_wallet_by_id(old_wallet_id,updated_wallet):
     data = helpers.db.getDb(helpers.path.join(helpers.path.dirname(__file__)+"/.." +"/database/wallets.json"))
@@ -37,13 +38,13 @@ def get_transactions():
     return data.getAll()
 
 def get_transactions_by_query(dict):
-   data = helpers.db.getDb(helpers.path.join(helpers.path.dirname(__file__)+"/.." +"/database/transactions.json"))
-   return data.getBy({"transactions_name":dict["transaction_name"]}) ##will be completed after transaction model is completed
+    data = helpers.db.getDb(helpers.path.join(helpers.path.dirname(__file__)+"/.." +"/database/transactions.json"))
+    return data.getBy({"transactions_name":dict["transaction_name"]}) ##will be completed after transaction model is completed
 
 
 def get_transaction_by_id(id):
-   data = helpers.db.getDb(helpers.path.join(helpers.path.dirname(__file__)+"/.." +"/database/transactions.json"))
-   return data.getBy({"id":id}) 
+    data = helpers.db.getDb(helpers.path.join(helpers.path.dirname(__file__)+"/.." +"/database/transactions.json"))
+    return data.getBy({"id":id}) 
 
 def update_transaction_by_id(old_object_id,updated_object):
     data = helpers.db.getDb(helpers.path.join(helpers.path.dirname(__file__)+"/.." +"/database/transactions.json"))

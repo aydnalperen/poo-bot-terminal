@@ -1,6 +1,8 @@
 import models
 import helpers
 
+
+
 def update_mode():
     print_modes()
     print("Which Mode Do You Want to Update?")
@@ -33,7 +35,7 @@ def choose_mode():
         for w in modes[i]["wallets"]:
             wallet_str += w["wallet_name"] + " "
         print("- "+str(i+1) + ". Name:" +
-              modes[i]["mode_name"] + "  Wallets:" + wallet_str + " Max tax: " , modes[i]["max_tax"])
+            modes[i]["mode_name"] + "  Wallets:" + wallet_str + " Max tax: " , modes[i]["max_tax"])
 
     indexes = input(
         "Write the numbers of modess that you want to use with your next trades (put spaces between numbers)")
@@ -57,7 +59,7 @@ def choose_mode():
         for w in newModesArray[i]["wallets"]:
             wallet_str += w["wallet_name"] + " "
         print("- "+str(i+1) + ". Name:" +
-              newModesArray[i]["mode_name"] + "  Wallets:" + wallet_str + " Max tax: " , newModesArray[i]["max_tax"])
+            newModesArray[i]["mode_name"] + "  Wallets:" + wallet_str + " Max tax: " , newModesArray[i]["max_tax"])
 
     return newModesArray
 
@@ -103,4 +105,4 @@ def print_modes():
         for w in modes[i]["wallets"]:
             walletString += w["wallet_name"] + " "
         print("- "+str(i+1) + ". Name:" +
-              modes[i]["mode_name"] + "  Wallets:" + walletString + " Max tax: " , modes[i]["max_tax"])
+            modes[i]["mode_name"] + "  Wallets:" + walletString + " Max tax: " , modes[i]["max_tax"])

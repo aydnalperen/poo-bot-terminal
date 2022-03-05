@@ -1,5 +1,6 @@
 import models
 import helpers
+
 def create_wallet():
     while True:
         name = input("Give a name to your wallet and press ENTER: ")

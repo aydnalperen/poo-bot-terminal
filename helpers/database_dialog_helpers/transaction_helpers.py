@@ -1,6 +1,7 @@
 import models
 import helpers
 
+
 def print_transactions():
     transactions = helpers.get_transactions()
     for transaction in transactions:
