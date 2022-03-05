@@ -105,3 +105,4 @@ def create_mode():
         print("This mode is set as default since it is the only mode.")
 
     print("New mode added into database.")
+

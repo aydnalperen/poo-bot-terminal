@@ -15,5 +15,4 @@ class WalletClass():
         return self.wallet_name
     def save_to_db(self):
         data = db.getDb("database/wallets.json")
-        print(data)
         data.add(self.__dict__)

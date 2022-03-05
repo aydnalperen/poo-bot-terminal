@@ -1,4 +1,5 @@
 from terminal.terminal.helpers.transaction_helpers import get_status
+from pysondb import db
 
 
 class TransactionClass():
@@ -19,6 +20,11 @@ class TransactionClass():
     #     # TODO: (Eren) Get latest price of the coin
     #     return self.coin_amount * (price of the coin) / self.total_amount * 100 - 100
 
+    def save_transaction_to_db(self):
+        data = db.getDb("database/transactions.json")
+        data.add(self.__dict__)
+
+        
 
             
 
@@ -34,3 +40,7 @@ class TradeClass():
 
     def check_coin_amount_and_update(self):
         self.coin_amount = 0 # TODO: (Eren) Get coin amount out from the transaction
+
+    def save_trade_to_db(self):
+        data = db.getDb("database/trades.json")
+        data.add(self.__dict__)

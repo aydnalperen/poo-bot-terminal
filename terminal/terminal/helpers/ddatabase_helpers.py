@@ -45,9 +45,9 @@ def get_transaction_by_id(id):
    data = db.getDb(path.join(path.dirname(__file__)+"/.." +"/database/transactions.json"))
    return data.getBy({"id":id}) 
 
-def update_transaction(old_object,updated_object):
+def update_transaction_by_id(old_object_id,updated_object):
     data = db.getDb(path.join(path.dirname(__file__)+"/.." +"/database/transactions.json"))
-    data.update(old_object, updated_object)
+    data.updateById(old_object_id, updated_object)
     
 def delete_transaction(id):
     data = db.getDb(path.join(path.dirname(__file__)+"/.." +"/database/transactions.json"))

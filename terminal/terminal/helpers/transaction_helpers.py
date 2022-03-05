@@ -1,3 +1,4 @@
+from terminal.terminal.models.transaction_class import TradeClass, TransactionClass
 from web3 import Web3
 import time
 import threading
@@ -77,7 +78,26 @@ def buy_token_from_wallet(wallet, ca):
         web3.eth.send_raw_transaction(signed_transaction.rawTransaction))
 
     print(transaction_address)
+    
+    
+    #transaction and trade 
+    trade = TradeClass(transaction_address,wallet["buy_amount"],15, "pending")
+    trade.check_status_and_update()
+    trade.save_trade_to_db()
+    
+    transactions = get_transactions()
+    
+    for transaction in transactions:
+        if transaction["tx_address"] == trade.tx_address:
+            transaction["trades"].append(trade.__dict__)
+            update_transaction_by_id(transaction["id"],transaction)
+            
+            return
 
+    #if transaction will be created
+    transaction = TransactionClass(transaction_address)   
+    transaction.add_trade(trade)
+    transaction.save_transaction_to_db()         
 # Approve
 
 
