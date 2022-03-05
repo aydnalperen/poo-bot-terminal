@@ -6,6 +6,10 @@ bsc_testnet = "https://data-seed-prebsc-1-s1.binance.org:8545/"
 
 
 def set_default_net():
+    try:
+        helpers.makedirs(helpers.path.join(helpers.path.dirname(__file__)+"/.." + "/database/"))
+    except:
+        pass
     network_dict = {"network": 1}
 
     data = helpers.db.getDb(helpers.path.join(helpers.path.dirname(__file__)+"/.." + "/database/selected_network.json"))
