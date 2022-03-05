@@ -108,7 +108,7 @@ def create_mode():
     for i in final_wallets:
         print("Wallets to buy:", i["wallet_name"],end=" ")
 
-    print("Max tax amount:", max_tax)
+    print("Max tax percentage:", max_tax)
 
     mode = ModeClass(mode_name, final_wallets, max_tax)
     mode.save_to_db()

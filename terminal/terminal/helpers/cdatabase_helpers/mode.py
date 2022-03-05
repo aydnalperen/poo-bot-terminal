@@ -8,14 +8,17 @@ from .create_helpers import *
 def update_mode():
     print_modes()
     print("Which Mode Do You Want to Update?")
-    answer = input("Enter the number of mode: ")
-
-    modes = get_modes()
-    updatedMode = modes[int(answer)-1]
+    try:
+        answer = input("Enter the number of mode: ")
+        modes = get_modes()
+        updatedMode = modes[int(answer)-1]
+    except:
+        print("Invalid Input!")
+        return
     old_name = modes[int(answer)-1]["mode_name"]
     mode_name = input("Give a name to your updated mode and press ENTER: ")
     max_tax = float(input(
-        "Write the maximum tax amount for updated mode and press ENTER: "))
+        "Write the maximum tax percentage for updated mode and press ENTER: "))
     updatedMode["mode_name"] = mode_name
     updatedMode["max_tax"] = max_tax
     update_mode_by_id(updatedMode["id"],updatedMode)
@@ -73,10 +76,14 @@ def remove_mode():
     print_modes()
     modes = get_modes()
     default_modes = get_default_modes()
-    print("Which Mode Do You Want to Delete?")
-    answer = input("Enter the number of mode: ")
-    
-    default_mode_to_delete = get_default_mode_by_name(modes[int(answer)-1]["mode_name"])
+    try:
+        print("Which Mode Do You Want to Delete?")
+        answer = input("Enter the number of mode: ")    
+        default_mode_to_delete = get_default_mode_by_name(modes[int(answer)-1]["mode_name"])
+        
+    except:
+        print("Invalid Input!")
+        return
     delete_default_mode(default_mode_to_delete[0]["id"])
     print("Mode ",modes[int(answer)-1]["mode_name"]," is removed from default modes." )
     delete_mode(modes[int(answer)-1]["id"])

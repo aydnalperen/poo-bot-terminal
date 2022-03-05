@@ -81,21 +81,7 @@ def buy_token_from_wallet(wallet, ca):
     
     
     #transaction and trade operations
-    trade = TradeClass(transaction_address,wallet["buy_amount"],15, "pending")
-    trade.check_status_and_update()
-    trade.save_trade_to_db()
-    
-    transactions = get_transactions()
-    
-    if transactions:
-        for transaction in transactions:
-            if transaction["tx_address"] == trade.tx_address:
-                transaction["trades"].append(trade.__dict__)
-                update_transaction_by_id(transaction["id"],transaction)  
-    else:
-        transaction = TransactionClass(transaction_address)   
-        transaction.add_trade(trade)
-        transaction.save_transaction_to_db()         
+        
 # Approve
 
 
@@ -230,10 +216,11 @@ def get_status(trade, tx_address):
             if(receipt.status == 1):
                 trade.status = "Success"
             elif(receipt.status == 0):
-                status = "Fail"
+                trade.status = "Fail"
         else:
-            status = "Pending"
+            trade.status = "Pending"
 
-        return status
+        return trade.status
     except:
         raise f"Exception occured while getting status of the transaction {tx_address}. \nCheck transaction_helpers.py > get_status()."
+    
