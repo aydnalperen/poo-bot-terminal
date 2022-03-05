@@ -22,6 +22,7 @@ def update_wallet():
     except:
         print("Invalid Input! Enter a proper input!")
         return
+
     updatedWallet["buy_amount"] = buy_amount
     updatedWallet["gas_limit"] = gas_limit
     updatedWallet["buy_gwei"] = buy_gwei
@@ -42,6 +43,7 @@ def update_wallet():
                 helpers.update_mode_by_id(mode["id"],mode)
                 print("Mode ",mode["mode_name"]," is updated due to changes in wallet ",wallet["wallet_name"]," .")
                 break
+
     for mode in default_modes: 
         for wallet in mode["wallets"]:
             if wallet["wallet_name"] == updatedWallet["wallet_name"]:
@@ -53,6 +55,8 @@ def update_wallet():
                 break
             
     print("Wallet ",updatedWallet["wallet_name"]," is succesfully updated.")
+
+    
 def remove_wallet():
     
     print_wallets()

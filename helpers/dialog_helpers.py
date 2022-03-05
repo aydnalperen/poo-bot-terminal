@@ -1,3 +1,4 @@
+import helpers
 def entry_dialog():
     pass
 
@@ -22,7 +23,7 @@ def network_dialog():
 
     network_selected = input("Write number of your decision and press ENTER: ")
     network_dict = {"network":network_selected}
-    data = db.getDb(path.join(path.dirname(__file__)+"/.." + "/database/selected_network.json"))
+    data = helpers.db.getDb(helpers.path.join(helpers.path.dirname(__file__)+"/.." + "/database/selected_network.json"))
     if not data.get(1):
         data.add(network_dict)  
     else:  

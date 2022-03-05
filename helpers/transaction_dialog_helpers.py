@@ -1,4 +1,3 @@
-from time import sleep 
 import helpers
 import models
 
@@ -12,7 +11,7 @@ def buy_dialog():
         for trade in trades:
             if trade["status"] == "Pending":
                 continue
-        sleep(2)
+        helpers.sleep(2)
 
             
 

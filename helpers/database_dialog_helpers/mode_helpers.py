@@ -1,4 +1,4 @@
-from models import *
+import models
 import helpers
 
 def update_mode():

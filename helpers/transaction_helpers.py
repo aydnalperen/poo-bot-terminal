@@ -1,6 +1,5 @@
 import models
 import helpers
-import time
 
 from web3 import Web3
 import threading
@@ -36,9 +35,9 @@ def buy_token(modes, ca):
     except:
         print("Invalid address")
         return
-    t = time.localtime()
+    t = helpers.localtime()
 
-    current_time = time.strftime("%H:%M:%S", t)
+    current_time = helpers.strftime("%H:%M:%S", t)
     print(current_time, "Buying", ca, "with wallets in modes:", modes)
 
     for mode in modes:
@@ -62,7 +61,7 @@ def buy_token_from_wallet(wallet, ca):
         0,
         [wbnb, token],
         address,
-        (int(time.time()) + 10000)
+        (int(helpers.time()) + 10000)
     ).buildTransaction({
         "from": address,
         "value": web3.toWei(wallet["buy_amount"], "ether"),
@@ -97,8 +96,8 @@ def approve_token(modes, ca):
     except:
         print("Invalid address")
         return
-    t = time.localtime()
-    current_time = time.strftime("%H:%M:%S", t)
+    t = helpers.localtime()
+    current_time = helpers.strftime("%H:%M:%S", t)
     print(current_time, "Approving wallets in modes:", modes, "with", ca)
 
 
@@ -153,8 +152,8 @@ def sell_token(modes, ca):
     except:
         print("Invalid address")
         return
-    t = time.localtime()
-    current_time = time.strftime("%H:%M:%S", t)
+    t = helpers.localtime()
+    current_time = helpers.strftime("%H:%M:%S", t)
     print(current_time, "Selling", ca, "from wallets in modes:", modes)
     token_contract = web3.eth.contract(token, abi=token_abi)
 
@@ -183,7 +182,7 @@ def sell_token_from_wallet(wallet, token, token_contract):
             amount, 0,
             [token, wbnb],
             address,
-            (int(time.time()) + 1000000)
+            (int(helpers.time()) + 1000000)
         ).buildTransaction({
             "from": address,
             "gasPrice": web3.toWei(wallet["sell_gwei"], "gwei"),

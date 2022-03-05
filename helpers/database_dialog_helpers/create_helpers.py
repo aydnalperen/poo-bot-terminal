@@ -1,6 +1,5 @@
 import models
-from helpers import *
-
+import helpers
 def create_wallet():
     while True:
         name = input("Give a name to your wallet and press ENTER: ")
@@ -37,7 +36,7 @@ def create_wallet():
 
         approved_tokens = []
 
-        nonce = get_nonce(address)
+        nonce = helpers.get_nonce(address)
         if nonce is None:
             print("Address you entered is invalid!")
             create_wallet()
@@ -69,7 +68,7 @@ def create_wallet():
             break
 
 def create_mode():
-    if(not get_wallets()):
+    if(not helpers.get_wallets()):
         print("You have no wallet to create a mode, add a wallet first!")
         create_wallet()
     try:
@@ -80,7 +79,7 @@ def create_mode():
 
     print("Your wallets are:")
 
-    wallets = get_wallets()
+    wallets = helpers.get_wallets()
     for i in range(len(wallets)):
         print(str(i+1) + ". " + str(wallets[i]["wallet_name"]))
 
@@ -110,8 +109,8 @@ def create_mode():
     mode = models.ModeClass(mode_name, final_wallets, max_tax)
     mode.save_to_db()
     
-    if len(get_modes())==1:
-        add_default_mode(mode.__dict__)
+    if len(helpers.get_modes())==1:
+        helpers.add_default_mode(mode.__dict__)
         print("This mode is set as default since it is the only mode.")
 
     print("New mode added into database.")
