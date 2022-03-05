@@ -1,3 +1,8 @@
+<<<<<<< Updated upstream:helpers/dialog_helpers.py
+=======
+from .cdatabase_helpers import *
+from pysondb import db
+>>>>>>> Stashed changes:terminal/terminal/helpers/cdialog_helpers.py
 def entry_dialog():
     pass
 
@@ -21,6 +26,14 @@ def network_dialog():
         print(o)
 
     network_selected = input("Write number of your decision and press ENTER: ")
+    network_dict = {"network":network_selected}
+    data = db.getDb(path.join(path.dirname(__file__)+"/.." + "/database/selected_network.json"))
+    if not data.get(1):
+        data.add(network_dict)  
+    else:  
+        network = data.get(1)
+        print(network)
+        data.updateById(network[0]["id"], network_dict)
     try:
         print("Connected Network:")
         print("-> " + network_options[int(network_selected)-1] + "\n")
