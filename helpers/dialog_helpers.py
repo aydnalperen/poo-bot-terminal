@@ -21,7 +21,6 @@ def network_dialog():
         print(o)
 
     network_selected = input("Write number of your decision and press ENTER: ")
-
     try:
         print("Connected Network:")
         print("-> " + network_options[int(network_selected)-1] + "\n")
