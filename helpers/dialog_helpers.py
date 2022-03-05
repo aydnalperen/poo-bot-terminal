@@ -1,8 +1,3 @@
-<<<<<<< Updated upstream:helpers/dialog_helpers.py
-=======
-from .cdatabase_helpers import *
-from pysondb import db
->>>>>>> Stashed changes:terminal/terminal/helpers/cdialog_helpers.py
 def entry_dialog():
     pass
 

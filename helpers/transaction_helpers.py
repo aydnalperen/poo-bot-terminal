@@ -4,14 +4,9 @@ import time
 
 from web3 import Web3
 import threading
-<<<<<<< Updated upstream:helpers/transaction_helpers.py
-
-=======
-from helpers.ddatabase_helpers import * 
 from pysondb import db
+from os import path
 
-   
->>>>>>> Stashed changes:terminal/terminal/helpers/transaction_helpers.py
 bsc_mainnet = "https://bsc-dataseed.binance.org/"
 bsc_testnet = "https://data-seed-prebsc-1-s1.binance.org:8545/"
 
