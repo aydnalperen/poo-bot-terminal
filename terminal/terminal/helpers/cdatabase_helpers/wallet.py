@@ -103,11 +103,7 @@ def print_wallets():
     at_str = ""
 
     for i in range(len(wallets)):
-        for at in wallets[i]["approved_tokens"]:
-            at_str += at
-
-        if(at_str == ""):
-            at_str = "There is not approved token yet."
+        
 
         walletTemp = wallets[i]
 
