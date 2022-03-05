@@ -9,8 +9,14 @@ bsc_testnet = "https://data-seed-prebsc-1-s1.binance.org:8545/"
 
 
 def get_net():
+<<<<<<< HEAD
     data = helpers.db.getDb(helpers.path.join(helpers.path.dirname(__file__)+"/.." + "/database/selected_network.json"))
     return data.get(1)
+=======
+    data = db.getDb(path.join(path.dirname(__file__)+"/.." + "/database/selected_network.json"))
+    selected = data.get(1)[0]["network"]
+    return bsc_testnet if selected ==1 else bsc_mainnet
+>>>>>>> 1b23cd6f12b724067fdf24b03b99b7f2611c0910
 
 
 
