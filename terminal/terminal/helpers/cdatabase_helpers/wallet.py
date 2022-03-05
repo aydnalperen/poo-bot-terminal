@@ -13,15 +13,18 @@ def update_wallet():
     
     updatedWallet = wallets[int(answer)-1]
 
-    buy_amount = float(input(
+    try:
+        buy_amount = float(input(
             "Give a buying amount to this wallet and press ENTER: "))
-    gas_limit = int(input(
-        "Give a gas limit to this wallet and press ENTER: "))
-    buy_gwei = int(input(
-        "Write the amount of buying gwei and press ENTER: "))
-    sell_gwei = int(input(
-        "Write the amount of selling gwei and press ENTER: "))
-    
+        gas_limit = int(input(
+            "Give a gas limit to this wallet and press ENTER: "))
+        buy_gwei = int(input(
+            "Write the amount of buying gwei and press ENTER: "))
+        sell_gwei = int(input(
+            "Write the amount of selling gwei and press ENTER: "))
+    except:
+        print("Invalid Input! Enter a proper input!")
+        return
     updatedWallet["buy_amount"] = buy_amount
     updatedWallet["gas_limit"] = gas_limit
     updatedWallet["buy_gwei"] = buy_gwei

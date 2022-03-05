@@ -1,5 +1,5 @@
 from models.transaction_class import *
-from terminal.terminal.helpers.ddatabase_helpers import get_transactions
+from terminal.terminal.helpers.ddatabase_helpers import get_transactions, update_transaction_by_id
 
 def print_transactions():
     transactions = get_transactions()
@@ -13,3 +13,25 @@ def print_transactions():
             print("Amount: ",trade["amount"])
             print("Coin Amount: ",trade["coin_amount"])
             print("Status: ",trade["status"])
+
+def add_to_transactions(trade):
+    transaction_address = trade["tx_address"]
+    trade.save_trade_to_db()
+    
+    transactions = get_transactions()
+    
+    if transactions:
+        for transaction in transactions:
+            if transaction["tx_address"] == trade.tx_address:
+                transaction["trades"].append(trade.__dict__)
+                update_transaction_by_id(transaction["id"],transaction)  
+    else:
+        transaction = TransactionClass(transaction_address)   
+        transaction.add_trade(trade)
+        transaction.save_transaction_to_db() 
+        
+def print_current_trades(trades):
+    pass
+    #for trade in trades:
+        
+    
