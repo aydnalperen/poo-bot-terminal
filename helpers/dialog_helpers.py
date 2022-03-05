@@ -1,5 +1,3 @@
-from .cdatabase_helpers import *
-
 def entry_dialog():
     pass
 

@@ -1,14 +1,11 @@
-from models.wallet_class import WalletClass
-from ..ddatabase_helpers import *
-from ..transaction_helpers import *
-from .create_helpers import *
-from .mode import *
+import models
+import helpers
 
 def update_wallet():
     print_wallets()
     print("Which Wallet Do You Want to Update?")
     answer = input("Enter the number of wallet: ")
-    wallets = get_wallets()
+    wallets = helpers.get_wallets()
     
     
     updatedWallet = wallets[int(answer)-1]
@@ -30,11 +27,11 @@ def update_wallet():
     updatedWallet["buy_gwei"] = buy_gwei
     updatedWallet["sell_gwei"] = sell_gwei
     
-    update_wallet_by_id(str(wallets[int(answer)-1]["id"]),updatedWallet)
+    helpers.update_wallet_by_id(str(wallets[int(answer)-1]["id"]),updatedWallet)
     
     
-    modes = get_modes()
-    default_modes = get_default_modes()
+    modes = helpers.get_modes()
+    default_modes = helpers.get_default_modes()
     
     for mode in modes: 
         for wallet in mode["wallets"]:
@@ -42,7 +39,7 @@ def update_wallet():
                 mode["wallets"].remove(wallet)
                 wallet = updatedWallet
                 mode["wallets"].append(wallet)
-                update_mode_by_id(mode["id"],mode)
+                helpers.update_mode_by_id(mode["id"],mode)
                 print("Mode ",mode["mode_name"]," is updated due to changes in wallet ",wallet["wallet_name"]," .")
                 break
     for mode in default_modes: 
@@ -51,7 +48,7 @@ def update_wallet():
                 mode["wallets"].remove(wallet)
                 wallet = updatedWallet
                 mode["wallets"].append(wallet)
-                update_default_mode_by_id(mode["id"],mode)
+                helpers.update_default_mode_by_id(mode["id"],mode)
                 print("Active Mode ",mode["mode_name"]," is updated due to changes in wallet ",wallet["wallet_name"]," .")
                 break
             
@@ -59,11 +56,11 @@ def update_wallet():
 def remove_wallet():
     
     print_wallets()
-    wallets = get_wallets()
+    wallets = helpers.get_wallets()
     print("Which Wallet Do You Want to Delete?")
     answer = input("Enter the number of wallet: ")
     
-    modes = get_modes()
+    modes = helpers.get_modes()
     
     modes_to_delete = []
     print("Modes ",end=" ")
@@ -79,29 +76,29 @@ def remove_wallet():
     yes_no = input("Your Answer: ")
     if int(yes_no) == 1:
         for mode in modes_to_delete:
-            delete_mode(mode["id"])
+            helpers.delete_mode(mode["id"])
             print("Mode ",mode["mode_name"]," is deleted.")
-            default_mode_to_delete = get_default_mode_by_name(mode["mode_name"])
+            default_mode_to_delete = helpers.get_default_mode_by_name(mode["mode_name"])
             if default_mode_to_delete:
-                delete_default_mode(default_mode_to_delete[0]["id"])       
+                helpers.delete_default_mode(default_mode_to_delete[0]["id"])       
     else:
         print("No wallet or mode is deleted.")
         return                    
     
-    delete_wallet(wallets[int(answer)-1]["id"])
+    helpers.delete_wallet(wallets[int(answer)-1]["id"])
     print("Wallet ",wallets[int(answer)-1]["wallet_name"]," is succesfuly deleted.")
 
-    if not get_default_modes():
+    if not helpers.get_default_modes():
         print("You have not a default (active) mode!")
-        if not get_modes():
+        if not helpers.get_modes():
             print("You have no mode, create one!")
-            create_mode()
+            helpers.create_mode()
         else:
-            choose_mode()
+            helpers.choose_mode()
 
 def print_wallets():
     print("Wallets:")
-    wallets = get_wallets()
+    wallets = helpers.get_wallets()
 
     at_str = ""
 

@@ -1,8 +1,10 @@
-from models.transaction_class import TradeClass, TransactionClass
-from web3 import Web3
+import models
+import helpers
 import time
+
+from web3 import Web3
 import threading
-from helpers.ddatabase_helpers import * 
+
 bsc_mainnet = "https://bsc-dataseed.binance.org/"
 bsc_testnet = "https://data-seed-prebsc-1-s1.binance.org:8545/"
 
@@ -68,7 +70,7 @@ def buy_token_from_wallet(wallet, ca):
     n = wallet
     n["nonce"] = str(int(wallet["nonce"]) + 1)
 
-    update_wallet_by_id(wallet["id"], n)
+    helpers.update_wallet_by_id(wallet["id"], n)
 
     signed_transaction = web3.eth.account.sign_transaction(
         transaction, private_key=wallet["private_key"]
@@ -126,7 +128,7 @@ def approve_token_from_wallet(wallet, token, token_contract):
         n = wallet
         n["nonce"] = str(int(wallet["nonce"]) + 1)
 
-        update_wallet_by_id(wallet["id"], n)
+        helpers.update_wallet_by_id(wallet["id"], n)
 
         signed_transaction = web3.eth.account.sign_transaction(
             transaction, private_key=wallet.private_key
@@ -188,7 +190,7 @@ def sell_token_from_wallet(wallet, token, token_contract):
         n = wallet
         n["nonce"] = str(int(wallet["nonce"]) + 1)
 
-        update_wallet_by_id(wallet["id"], n)
+        helpers.update_wallet_by_id(wallet["id"], n)
 
         signed_transaction = web3.eth.account.sign_transaction(
             transaction, private_key=wallet["private_key"]

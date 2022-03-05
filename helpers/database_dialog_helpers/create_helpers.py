@@ -1,8 +1,5 @@
-from models.wallet_class import WalletClass
-from models.mode_class import ModeClass
-from ..ddatabase_helpers import *
-from ..transaction_helpers import *
-
+import models
+from helpers import *
 
 def create_wallet():
     while True:
@@ -51,7 +48,7 @@ def create_wallet():
 
 
 
-        wallet = WalletClass(name, address, private_key,buy_amount  ,
+        wallet = models.WalletClass(name, address, private_key,buy_amount  ,
                             gas_limit, buy_gwei, sell_gwei, nonce, approved_tokens)
         wallet.save_to_db()
         print("WalletClass Name: ",wallet.wallet_name)
@@ -110,7 +107,7 @@ def create_mode():
 
     print("Max tax percentage:", max_tax)
 
-    mode = ModeClass(mode_name, final_wallets, max_tax)
+    mode = models.ModeClass(mode_name, final_wallets, max_tax)
     mode.save_to_db()
     
     if len(get_modes())==1:

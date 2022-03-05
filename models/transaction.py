@@ -1,6 +1,5 @@
-from helpers.transaction_helpers import *
 from pysondb import db
-
+import helpers
 
 class TransactionClass():
     def __init__(self, ca, trades = [], total_amount = 0, coin_amount = 0,is_over=False):
@@ -36,7 +35,7 @@ class TradeClass():
         self.status = status
 
     def check_status_and_update(self):
-        self.status = get_status(self.tx_address)
+        self.status = helpers.get_status(self.tx_address)
 
     def check_coin_amount_and_update(self):
         self.coin_amount = 0 # TODO: (Eren) Get coin amount out from the transaction

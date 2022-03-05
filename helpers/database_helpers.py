@@ -1,5 +1,6 @@
 from pysondb import db
 from os import path
+
 def get_wallets():
    data = db.getDb(path.join(path.dirname(__file__)+"/.." + "/database/wallets.json"))
    return data.getAll()

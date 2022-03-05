@@ -1,16 +1,12 @@
-from operator import ge
-from models.mode_class import ModeClass
-from ..ddatabase_helpers import *
-from .create_helpers import *
-
-
+from models import *
+import helpers
 
 def update_mode():
     print_modes()
     print("Which Mode Do You Want to Update?")
     try:
         answer = input("Enter the number of mode: ")
-        modes = get_modes()
+        modes = helpers.get_modes()
         updatedMode = modes[int(answer)-1]
     except:
         print("Invalid Input!")
@@ -21,16 +17,16 @@ def update_mode():
         "Write the maximum tax percentage for updated mode and press ENTER: "))
     updatedMode["mode_name"] = mode_name
     updatedMode["max_tax"] = max_tax
-    update_mode_by_id(updatedMode["id"],updatedMode)
+    helpers.update_mode_by_id(updatedMode["id"],updatedMode)
     print("Mode is succesfully updated!")
-    update_default_mode_by_name(old_name,updatedMode)
+    helpers.update_default_mode_by_name(old_name,updatedMode)
     print("Active mode is updated!")
 def choose_mode():
-    if not get_wallets():
+    if not helpers.get_wallets():
         print("You have no wallets to create a mode, add a wallet first!")
-        create_wallet()
+        helpers.create_wallet()
     print("\nyour modes are: ")
-    modes = get_modes()
+    modes = helpers.get_modes()
 
     wallet_str = ""
     for i in range(len(modes)):
@@ -43,13 +39,13 @@ def choose_mode():
         "Write the numbers of modess that you want to use with your next trades (put spaces between numbers)")
     indexes.split()
     newModesArray = []
-    old_default_modes = get_default_modes()
+    old_default_modes = helpers.get_default_modes()
     for i in old_default_modes:
-        delete_default_mode(i["id"])
+        helpers.delete_default_mode(i["id"])
     for i in indexes:
         try:
             newModesArray.append(modes[int(i) - 1])
-            add_default_mode(modes[int(i) - 1])
+            helpers.add_default_mode(modes[int(i) - 1])
         except:
             print("Invalid input!")
     
@@ -67,40 +63,40 @@ def choose_mode():
 
 
 def remove_mode():
-    if not get_modes() :
+    if not helpers.get_modes() :
         print("There is no saved mode!\n")
         print("Create a new one: \n")
-        create_mode()
+        helpers.create_mode()
         return
     
     print_modes()
-    modes = get_modes()
-    default_modes = get_default_modes()
+    modes = helpers.get_modes()
+    default_modes = helpers.get_default_modes()
     try:
         print("Which Mode Do You Want to Delete?")
         answer = input("Enter the number of mode: ")    
-        default_mode_to_delete = get_default_mode_by_name(modes[int(answer)-1]["mode_name"])
+        default_mode_to_delete = helpers.get_default_mode_by_name(modes[int(answer)-1]["mode_name"])
         
     except:
         print("Invalid Input!")
         return
-    delete_default_mode(default_mode_to_delete[0]["id"])
+    helpers.delete_default_mode(default_mode_to_delete[0]["id"])
     print("Mode ",modes[int(answer)-1]["mode_name"]," is removed from default modes." )
-    delete_mode(modes[int(answer)-1]["id"])
+    helpers.delete_mode(modes[int(answer)-1]["id"])
     print("Mode ",modes[int(answer)-1]["mode_name"]," is succesfuly deleted.")
     
-    if not get_default_modes():
+    if not helpers.get_default_modes():
         print("You have not a default (active) mode!")
         
-        if not get_modes():
+        if not helpers.get_modes():
             print("You have no mode, create one!")
-            create_mode()
+            helpers.create_mode()
         else:
             choose_mode()
 
 def print_modes():
     print("Modes: ")
-    modes = get_modes()
+    modes = helpers.get_modes()
     walletString = ""
     for i in range(len(modes)):
 
