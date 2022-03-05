@@ -88,5 +88,5 @@ ENV/
 
 # Rope project settings
 .ropeproject
-terminal/database/*
-!terminal/database/__init__.py
+database/*
+!database/__init__.py
