@@ -1,5 +1,5 @@
 from models.transaction_class import *
-from terminal.terminal.helpers.ddatabase_helpers import get_transactions, update_transaction_by_id
+from helpers.ddatabase_helpers import *
 
 def print_transactions():
     transactions = get_transactions()

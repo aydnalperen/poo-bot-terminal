@@ -1,4 +1,4 @@
-from terminal.terminal.helpers.cdatabase_helpers.transactions import add_to_transactions, print_current_trades
+from helpers.cdatabase_helpers.transactions import *
 from .cdatabase_helpers import *
 from .transaction_helpers import *
 import time
