@@ -4,10 +4,19 @@ import helpers
 bsc_mainnet = "https://bsc-dataseed.binance.org/"
 bsc_testnet = "https://data-seed-prebsc-1-s1.binance.org:8545/"
 
+
+def set_default_net():
+    network_dict = {"network": 1}
+
+    data = helpers.db.getDb(helpers.path.join(helpers.path.dirname(__file__)+"/.." + "/database/selected_network.json"))
+    if not data.getAll():
+        data.add(network_dict)
+
 def get_net():
+    set_default_net()
     data = helpers.db.getDb(helpers.path.join(helpers.path.dirname(__file__)+"/.." + "/database/selected_network.json"))
     
-    selected = data.get(1)[0]["network"]
+    selected = data.getAll()[0]["network"]
     return bsc_testnet if selected ==1 else bsc_mainnet
 
 
