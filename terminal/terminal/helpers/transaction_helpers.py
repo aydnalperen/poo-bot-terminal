@@ -1,4 +1,4 @@
-from terminal.terminal.models.transaction_class import TradeClass, TransactionClass
+from models.transaction_class import TradeClass, TransactionClass
 from web3 import Web3
 import time
 import threading
