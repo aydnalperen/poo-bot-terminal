@@ -1,4 +1,6 @@
+from email.policy import default
 import helpers
+from helpers.database_helpers import get_default_modes
 
 def entry_dialog():
     pass
@@ -6,7 +8,10 @@ def entry_dialog():
 def main_dialog():
     actions = ["1. Buy token", "2. Sell token", "3. Approve token","4. Modes and Wallets Options"
             ,"5. Show Modes and Wallets."]
-
+    default_modes =get_default_modes()    
+    print("Your active modes: \n")
+    for i in default_modes:
+        print("\tMode name: ",i["mode_name"],"\n")
     print("What action do you want to do?")
     for a in actions:
         print(a)
