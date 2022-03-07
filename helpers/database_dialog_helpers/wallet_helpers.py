@@ -105,7 +105,6 @@ def print_wallets():
     print("Wallets:")
     wallets = helpers.get_wallets()
 
-    at_str = ""
 
     for i in range(len(wallets)):
         
@@ -113,4 +112,4 @@ def print_wallets():
         walletTemp = wallets[i]
 
         print("- "+str(i+1) + ". Name:" + walletTemp["wallet_name"] ,"Id:",walletTemp["id"], "  Adress:" + walletTemp["address"] + "  Buying Amount:" + str(walletTemp["buy_amount"]) + "  Buying Gwei:" + str(walletTemp["buy_gwei"])
-            + "  Selling Gwei:" +str( walletTemp["sell_gwei"]) + "  Approved Tokens:" + at_str)
+            + "  Selling Gwei:" +str( walletTemp["sell_gwei"]) )

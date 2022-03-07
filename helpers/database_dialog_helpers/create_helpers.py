@@ -97,7 +97,7 @@ def create_mode():
 
 
     try:
-        max_tax = float(input("Write the maximum tax amount for this mode and press ENTER: "))
+        max_tax = float(input("Write the maximum tax percentage for this mode and press ENTER: "))
     except:
         print("Invalid Input! Enter a number!")
         return
@@ -110,10 +110,10 @@ def create_mode():
 
     mode = models.ModeClass(mode_name, final_wallets, max_tax)
     mode.save_to_db()
-    
+    print("New mode added into database.")
     if len(helpers.get_modes())==1:
         helpers.add_default_mode(mode.__dict__)
         print("This mode is set as default since it is the only mode.")
 
-    print("New mode added into database.")
+    
 
