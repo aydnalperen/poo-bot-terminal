@@ -68,6 +68,11 @@ def buy_token_from_wallet(wallet, ca, results):
     token = web3.toChecksumAddress(ca)
 
     address = wallet["address"]
+    
+    n = wallet
+    n["nonce"] = get_nonce(wallet["address"]) + 1
+
+    helpers.update_wallet_by_id(wallet["id"], n)
 
     transaction = pancake_contract.functions.swapExactETHForTokens(
         0,
@@ -82,10 +87,6 @@ def buy_token_from_wallet(wallet, ca, results):
         "nonce": wallet["nonce"]
     })
 
-    n = wallet
-    n["nonce"] = str(int(wallet["nonce"]) + 1)
-
-    helpers.update_wallet_by_id(wallet["id"], n)
 
     signed_transaction = web3.eth.account.sign_transaction(
         transaction, private_key=wallet["private_key"]
