@@ -5,6 +5,7 @@ def buy_dialog():
     modes = helpers.get_default_modes()
     ca = input("BUY - Paste the contract address and press ENTER: ")
     trades=helpers.buy_token(modes, ca)
+        
     isPending = True
     while isPending:
         helpers.print_current_trades(trades)
@@ -12,6 +13,7 @@ def buy_dialog():
             if not trade.status == "Pending":
                 isPending = False
             else:
+                trade.check_status_and_update()
                 isPending=True
                 break
         helpers.sleep(2)

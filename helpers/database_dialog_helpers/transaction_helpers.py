@@ -31,7 +31,12 @@ def add_to_transactions(trade):
         transaction.save_transaction_to_db() 
         
 def print_current_trades(trades):
-    pass
-    #for trade in trades:
-            
+    i = 1
+    for trade in trades:
+        print("Trade: ",i,end=" ")
+        i=i+1
+        print("Tx Address: ",trade.tx_address,end=" ")
+        print("Amount: ",trade.amount,end=" ")
+        print("Coin Amount: ",trade.coin_amount,end=" ")
+        print("Status: ",trade.status)            
         

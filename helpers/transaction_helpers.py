@@ -1,6 +1,5 @@
 import models
 import helpers
-from models.transaction import TradeClass
 
 bsc_mainnet = "https://bsc-dataseed.binance.org/"
 bsc_testnet = "https://data-seed-prebsc-1-s1.binance.org:8545/"
@@ -48,23 +47,20 @@ def buy_token(modes, ca):
 
     current_time = helpers.strftime("%H:%M:%S", t)
     print(current_time, "Buying", ca, "with wallets in modes:", modes)
-    results = []
 
     for mode in modes:
-        t = helpers.threading.Thread(target=buy_token_from_mode(mode, ca, results))
+        t = helpers.threading.Thread(target=buy_token_from_mode(mode, ca))
         t.start()
 
-    return results
 
-
-def buy_token_from_mode(mode, ca, results):
+def buy_token_from_mode(mode, ca):
     wallets = mode["wallets"]
-
+    print(wallets)
     for wallet in wallets:
-        t = helpers.threading.Thread(target=buy_token_from_wallet(wallet, ca, results))
+        t = helpers.threading.Thread(target=buy_token_from_wallet(wallet, ca))
 
 
-def buy_token_from_wallet(wallet, ca, results):
+def buy_token_from_wallet(wallet, ca):
     token = web3.toChecksumAddress(ca)
 
     address = wallet["address"]
@@ -94,8 +90,9 @@ def buy_token_from_wallet(wallet, ca, results):
     transaction_address = web3.toHex(
         web3.eth.send_raw_transaction(signed_transaction.rawTransaction))
 
-    trade = TradeClass(transaction_address, wallet["buy_amount"], 15, "Pending")
-    results.append(trade)
+    print(transaction_address)
+    
+    
     #transaction and trade operations
         
 # Approve
