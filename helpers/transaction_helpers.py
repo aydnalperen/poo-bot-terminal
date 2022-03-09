@@ -48,25 +48,33 @@ def buy_token(modes, ca):
     current_time = helpers.strftime("%H:%M:%S", t)
     print(current_time, "Buying", ca, "with wallets in modes:", modes)
 
+    trades = []
+    
     for mode in modes:
-        t = helpers.threading.Thread(target=buy_token_from_mode(mode, ca))
+        t = helpers.threading.Thread(target=buy_token_from_mode(mode, ca, trades))
         t.start()
 
+    return trades
 
-def buy_token_from_mode(mode, ca):
+
+def buy_token_from_mode(mode, ca, trades):
     wallets = mode["wallets"]
     print(wallets)
     for wallet in wallets:
-        t = helpers.threading.Thread(target=buy_token_from_wallet(wallet, ca))
+        address = wallet["address"]
+        wallet["nonce"] = get_nonce(wallet["address"]) + 1
+        n = wallet
+        helpers.update_wallet_by_id(wallet["id"], n)
+        
+        t = helpers.threading.Thread(target=buy_token_from_wallet(wallet, ca, trades))
 
 
-def buy_token_from_wallet(wallet, ca):
+def buy_token_from_wallet(wallet, ca, trades):
     token = web3.toChecksumAddress(ca)
 
     address = wallet["address"]
-    
+    wallet["nonce"] = get_nonce(wallet["address"]) + 1
     n = wallet
-    n["nonce"] = get_nonce(wallet["address"]) + 1
 
     helpers.update_wallet_by_id(wallet["id"], n)
 
@@ -90,6 +98,9 @@ def buy_token_from_wallet(wallet, ca):
 
     transaction_address = web3.toHex(
         web3.eth.send_raw_transaction(signed_transaction.rawTransaction))
+
+    trade = models.TradeClass(transaction_address, wallet["buy_amount"], 15, "Pending")
+    trades.append(trade)
 
     print(transaction_address)
     
@@ -235,6 +246,7 @@ def get_status(trade, tx_address):
             trade.status = "Pending"
 
         return trade.status
-    except:
-        raise f"Exception occured while getting status of the transaction {tx_address}. \nCheck transaction_helpers.py > get_status()."
+    except Exception as e:
+        print(e)
+        print(f"Exception occured while getting status of the transaction {tx_address}. \nCheck transaction_helpers.py > get_status().")
     
