@@ -62,7 +62,7 @@ def buy_token_from_mode(mode, ca, trades):
     print(wallets)
     for wallet in wallets:
         address = wallet["address"]
-        wallet["nonce"] = get_nonce(wallet["address"]) + 1
+        wallet["nonce"] = get_nonce(wallet["address"])
         n = wallet
         helpers.update_wallet_by_id(wallet["id"], n)
         
@@ -73,10 +73,6 @@ def buy_token_from_wallet(wallet, ca, trades):
     token = web3.toChecksumAddress(ca)
 
     address = wallet["address"]
-    wallet["nonce"] = get_nonce(wallet["address"]) + 1
-    n = wallet
-
-    helpers.update_wallet_by_id(wallet["id"], n)
 
     transaction = pancake_contract.functions.swapExactETHForTokens(
         0,
