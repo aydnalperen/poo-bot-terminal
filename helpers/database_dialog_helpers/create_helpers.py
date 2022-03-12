@@ -95,7 +95,7 @@ def create_mode():
         except:
             print("Invalid Input!")    
 
-
+ 
     try:
         max_tax = float(input("Write the maximum tax percentage for this mode and press ENTER: "))
     except:

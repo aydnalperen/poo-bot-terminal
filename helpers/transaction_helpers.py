@@ -34,10 +34,11 @@ token_abi = '[{"inputs":[{"internalType":"string","name":"_NAME","type":"string"
 
 pancake_contract = web3.eth.contract(
     address=pancake_router_contract_address, abi=pancake_abi)
-
+web3 = helpers.Web3(helpers.Web3.HTTPProvider(get_net()))
 
 # Buy
 def buy_token(modes, ca):
+    web3 = helpers.Web3(helpers.Web3.HTTPProvider(get_net()))
     try:
         token = web3.toChecksumAddress(ca)
     except:
