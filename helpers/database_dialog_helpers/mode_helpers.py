@@ -99,10 +99,12 @@ def remove_mode():
 def print_modes():
     print("Modes: ")
     modes = helpers.get_modes()
-    walletString = ""
+    
     for i in range(len(modes)):
-
+        walletString = " "  
         for w in modes[i]["wallets"]:
-            walletString += w["wallet_name"] + " "
+            walletString+=w["wallet_name"]     
         print("- "+str(i+1) + ". Name:" +
             modes[i]["mode_name"] + "  Wallets:" + walletString + " Max tax: " , modes[i]["max_tax"])
+         
+        
