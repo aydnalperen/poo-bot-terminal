@@ -87,7 +87,9 @@ def buy_token_from_wallet(wallet, ca, trades):
         "nonce": wallet["nonce"]
     })
 
-
+    n = wallet
+    n["nonce"] = str(int(wallet["nonce"]) + 1)
+    
     signed_transaction = web3.eth.account.sign_transaction(
         transaction, private_key=wallet["private_key"]
     )
