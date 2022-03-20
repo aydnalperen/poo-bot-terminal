@@ -5,12 +5,13 @@ import helpers
 def update_wallet():
     print_wallets()
     print("Which Wallet Do You Want to Update?")
-    answer = input("Enter the number of wallet: ")
-    wallets = helpers.get_wallets()
-    
-    
-    updatedWallet = wallets[int(answer)-1]
-
+    try:
+        answer = input("Enter the number of wallet: ")
+        wallets = helpers.get_wallets()
+        updatedWallet = wallets[int(answer)-1]
+    except:
+        print("Invalid Input!")
+        return
     try:
         buy_amount = float(input(
             "Give a buying amount to this wallet and press ENTER: "))

@@ -3,7 +3,7 @@ import helpers
 if __name__ == "__main__":
     helpers.entry_dialog()
 
-    network_index = helpers.network_dialog()
+    #network_index = helpers.network_dialog()
 
     if(not helpers.get_default_modes()):
         if not helpers.get_modes():

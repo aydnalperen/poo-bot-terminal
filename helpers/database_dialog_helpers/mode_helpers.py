@@ -14,10 +14,12 @@ def update_mode():
         print("Invalid Input!")
         return
     old_name = modes[int(answer)-1]["mode_name"]
-    mode_name = input("Give a name to your updated mode and press ENTER: ")
-    max_tax = float(input(
+    try:
+        max_tax = float(input(
         "Write the maximum tax percentage for updated mode and press ENTER: "))
-    updatedMode["mode_name"] = mode_name
+    except:
+        print("Invalid Input!")
+        return
     updatedMode["max_tax"] = max_tax
     helpers.update_mode_by_id(updatedMode["id"],updatedMode)
     print("Mode is succesfully updated!")
